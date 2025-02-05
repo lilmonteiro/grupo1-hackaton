@@ -17,7 +17,7 @@ from yolov5.utils.dataloaders import LoadImages
 from yolov5.utils.general import non_max_suppression, scale_segments
 from yolov5.utils.torch_utils import select_device
 
-model_path = "yolov5/runs/train/exp5/weights/best.pt"
+model_path = "yolov5/runs/train/exp10/weights/best.pt"
 
 EMAIL_SENDER = os.environ["EMAIL_SENDER"]
 EMAIL_PASSWORD = os.environ["EMAIL_PASSWORD"]
@@ -78,17 +78,19 @@ def detect_objects(input_path, model_path):
                 for *box, conf, cls in pred:
                     label = model.names[int(cls)]
                 
-                    if object_type != label:
-                        counter = 0
+                    # if object_type != label:
+                    #     counter = 0
 
                     object_type = label
 
-                    if conf >= 0.4:   
+                    if conf >= 0.5:   
                         print(f"Objeto detectado: {label} com assertividade {conf:.2f}")
                         if (object_type == "objeto cortante" or object_type == "arma de fogo") and counter == 0:
                             counter = counter + 1
                             send_email_alert(object_type, image_bytes)
                     else:
+                        # object_type = "objeto anomalo"
+                        counter = 0
                         print(f"Objeto anômalo com assertividade {conf:.2f}")     
 
 def main():
