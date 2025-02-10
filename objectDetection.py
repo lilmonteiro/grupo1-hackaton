@@ -8,16 +8,38 @@ import torch
 import cv2
 import io
 
-# atualizar pra diretorio dinamico
-yolov5_dir = r"C:\Users\happi\OneDrive\Documents\FIAP\IAPARADEVS\hacka\yolov5"
+import pathlib
+import sys
+from pathlib import Path
+
+# Corrige o problema de WindowsPath no macOS
+if sys.platform != "win32":
+    pathlib.WindowsPath = pathlib.PosixPath
+
+
+from dotenv import load_dotenv
+
+# Carrega variáveis do arquivo .env
+load_dotenv()
+
+
+# Diretório atual do arquivo objectDetection.py
+current_dir = os.path.dirname(os.path.abspath(__file__))
+
+# Caminho da pasta yolov5 dentro do projeto
+yolov5_dir = os.path.join(current_dir, "yolov5")
+
+# Adiciona o diretório raiz do projeto e o yolov5 ao sys.path
+sys.path.append(current_dir)
 sys.path.append(yolov5_dir)
+
 
 from yolov5.models.common import DetectMultiBackend
 from yolov5.utils.dataloaders import LoadImages
 from yolov5.utils.general import non_max_suppression, scale_segments
 from yolov5.utils.torch_utils import select_device
 
-model_path = "yolov5/runs/train/exp10/weights/best.pt"
+model_path = "yolov5/runs/train/twenty-epochs/weights/best.pt"
 
 EMAIL_SENDER = os.environ["EMAIL_SENDER"]
 EMAIL_PASSWORD = os.environ["EMAIL_PASSWORD"]
