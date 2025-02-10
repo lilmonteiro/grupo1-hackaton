@@ -1,6 +1,8 @@
 # YOLOv5 Object Detection - Projeto GRUPO1-HACKATON
 
-Este README descreve todo o processo de configuração do ambiente, instalação de dependências e execução do projeto de detecção de objetos usando YOLOv5.
+## Diagrama do Modelo
+![WhatsApp Image 2025-01-31 at 12 28 38](https://github.com/user-attachments/assets/294f85ab-4b87-45fb-9df6-a4713ad914f2)
+
 
 ## Requisitos
 
